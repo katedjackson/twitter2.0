@@ -1,6 +1,9 @@
 var express = require( 'express' );
 var app = express();
 var nunjucks = require('nunjucks');
+var routes = require('./routes/');
+app.use('/', routes);
+app.use(express.static('public'));
 
 var locals = {
 	title: 'This is an example',
