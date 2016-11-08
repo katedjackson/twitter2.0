@@ -3,11 +3,17 @@ var bodyParser = require('body-parser')
 var app = express();
 var nunjucks = require('nunjucks');
 var routes = require('./routes/');
-app.use('/', routes);
+var socketio = require('socket.io');
+
+//var server = app.listen(3000);
+var io = socketio.listen(server);
+
+app.use('/', routes(io));
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')
@@ -31,7 +37,7 @@ app.engine('html', nunjucks.render); // when giving html files to res.render, te
 // 	console.log(output);
 // });
 
-app.listen(3000, function() {
+var server = app.listen(3000, function() {
   console.log('Server 3000 listening');
 });
 
