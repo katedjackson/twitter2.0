@@ -50,10 +50,19 @@ code {
   height: 48px;
   width: 48px;
   content:url("http://lorempixel.com/48/48");
+  margin-right: 60px;
 }
+
 .content {
-  margin-left: 60px;
+  list-style-type: none;
+  margin-bottom: 10px;
 }
+
 .content .by {
   font-weight: bold;
+  font-size: 16px;
+}
+
+#feed {
+  font-size: 40px;
 }

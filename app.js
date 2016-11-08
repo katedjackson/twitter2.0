@@ -1,9 +1,18 @@
 var express = require( 'express' );
+var bodyParser = require('body-parser')
 var app = express();
 var nunjucks = require('nunjucks');
 var routes = require('./routes/');
 app.use('/', routes);
 app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
 
 var locals = {
 	title: 'This is an example',
